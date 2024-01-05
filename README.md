@@ -1,5 +1,3 @@
-# CellBasedNumericalMethods
-
 ## Code for J.M. Osborne  "An adaptive numerical method for multi-cellular simulations of organ development and disease" 
 
 This project contains the code necesary for running the simulations presented in "An adaptive numerical method for multi-cellular simulations of organ development and disease"
