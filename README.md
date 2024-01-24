@@ -1,4 +1,4 @@
-## Code for J.M. Osborne  "An adaptive numerical method for multi-cellular simulations of organ development and disease" 
+## Code for J.M. Osborne  "An adaptive numerical method for multi-cellular simulations of organ development and disease" https://www.biorxiv.org/content/10.1101/2024.01.06.574290v1
 
 This project contains the code necesary for running the simulations presented in "An adaptive numerical method for multi-cellular simulations of organ development and disease"
 
