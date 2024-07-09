@@ -72,7 +72,7 @@ private:
     /**
      * Size of the forward Euler step applied to the initial positions, to help with convergence
      */
-    double mFEStepSize;
+    double mFeStepSize;
 
 public:
     /**
@@ -109,14 +109,14 @@ public:
      *
      * @param stepSize The new step size
      */
-    void SetFEStepSize(double stepSize);
+    void SetFeStepSize(double stepSize);
 
     /**
      * Get the size of the initial forward Euler step
      *
-     * @return mFEStepSize
+     * @return mFeStepSize
      */
-    const double& GetFEStepSize() const;
+    const double& GetFeStepSize() const;
 
     /**
      * Get the PETSc nonlinear solver tolerance
@@ -175,7 +175,7 @@ inline void save_construct_data(
     Archive & ar, const BackwardEulerNumericalMethod<ELEMENT_DIM,SPACE_DIM> * t, const unsigned int file_version)
 {
     // Save data required to construct instance
-    const double stepSize = t->GetFEStepSize();
+    const double stepSize = t->GetFeStepSize();
     ar << stepSize;
 
     const double tol = t->GetSolverTolerance();
@@ -198,7 +198,7 @@ inline void load_construct_data(
 
     // Invoke constructor to initialise instance
     ::new(t)BackwardEulerNumericalMethod<ELEMENT_DIM,SPACE_DIM>();
-    t->SetFEStepSize(stepSize);
+    t->SetFeStepSize(stepSize);
     t->SetSolverTolerance(tol);
 }
 }

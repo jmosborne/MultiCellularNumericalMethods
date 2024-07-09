@@ -41,7 +41,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>	
 BackwardEulerNumericalMethod<ELEMENT_DIM,SPACE_DIM> :: BackwardEulerNumericalMethod():
   AbstractNumericalMethod<ELEMENT_DIM,SPACE_DIM>(),
-  mFEStepSize(0.01),
+  mFeStepSize(0.01),
   mTolerance(1e-8),
   mSolverDt(DOUBLE_UNSET)
 {	
@@ -63,9 +63,12 @@ void BackwardEulerNumericalMethod<ELEMENT_DIM,SPACE_DIM>::UpdateAllNodePositions
         mSolverDt = dt;
 
         unsigned systemSize = this->mpCellPopulation->GetNumNodes()*SPACE_DIM;
-        std::vector< c_vector<double,SPACE_DIM> > initialLocations = this->SaveCurrentLocations();
-        std::vector< c_vector<double,SPACE_DIM> > initialF = this->ComputeForcesIncludingDamping();
 
+        std::vector< c_vector<double,SPACE_DIM> > initialLocations(systemSize,zero_vector<double>(SPACE_DIM));
+        initialLocations = this->SaveCurrentLocations();
+
+        std::vector< c_vector<double,SPACE_DIM> > initialF(systemSize,zero_vector<double>(SPACE_DIM));
+        initialF = this->ComputeForcesIncludingDamping();
         // Setup an initial guess consisting of the current node locations + one forward Euler step (note no bcs are applied here)
         Vec initialCondition = PetscTools::CreateAndSetVec(systemSize, 0.0);
         int index = 0;
@@ -73,10 +76,15 @@ void BackwardEulerNumericalMethod<ELEMENT_DIM,SPACE_DIM>::UpdateAllNodePositions
              node_iter != this->mpCellPopulation->rGetMesh().GetNodeIteratorEnd();
              ++node_iter, ++index)
         {
-            c_vector<double, SPACE_DIM> location = node_iter->rGetLocation();
+            c_vector<double, SPACE_DIM> node_location = node_iter->rGetLocation();
+            c_vector<double, SPACE_DIM> localF = initialF[index];
+            
+            double initial_guess = 0.0;
             for(unsigned i=0; i<SPACE_DIM; i++)
             {
-                PetscVecTools::SetElement(initialCondition, SPACE_DIM*index + i,  location[i] + mFEStepSize * initialF[index][i]); // Use a FE step as initial Guess
+                //initial_guess = node_location(i) + mFeStepSize*localF(i); // Use a FE step as initial Guess
+                
+                PetscVecTools::SetElement(initialCondition, SPACE_DIM*index + i,  initial_guess); 
             }
         }
 
@@ -127,15 +135,15 @@ void BackwardEulerNumericalMethod<ELEMENT_DIM,SPACE_DIM>::UpdateAllNodePositions
 
 
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>  
-void BackwardEulerNumericalMethod<ELEMENT_DIM, SPACE_DIM>::SetFEStepSize(double stepSize)
+void BackwardEulerNumericalMethod<ELEMENT_DIM, SPACE_DIM>::SetFeStepSize(double stepSize)
 {
-    mFEStepSize = stepSize;
+    mFeStepSize = stepSize;
 };
 
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>  
-const double& BackwardEulerNumericalMethod<ELEMENT_DIM, SPACE_DIM>::GetFEStepSize() const
+const double& BackwardEulerNumericalMethod<ELEMENT_DIM, SPACE_DIM>::GetFeStepSize() const
 {
-    return mFEStepSize;
+    return mFeStepSize;
 };
 
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>  
@@ -155,7 +163,7 @@ void BackwardEulerNumericalMethod<ELEMENT_DIM, SPACE_DIM>::SetSolverTolerance(do
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>  
 void BackwardEulerNumericalMethod<ELEMENT_DIM, SPACE_DIM>::OutputNumericalMethodParameters(out_stream& rParamsFile)
 {
-    *rParamsFile << "\t\t\t<FEStepSize>" << mFEStepSize << "</FEStepSize>\n";
+    *rParamsFile << "\t\t\t<FeStepSize>" << mFeStepSize << "</FeStepSize>\n";
     *rParamsFile << "\t\t\t<SolverTolerance>" << mTolerance << "</SolverTolerance>\n";
 
     // Call method on direct parent class

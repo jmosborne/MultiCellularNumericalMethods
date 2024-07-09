@@ -44,12 +44,17 @@ c_vector<double, SPACE_DIM> StableRandomDirectionVertexBasedDivisionRule<SPACE_D
     unsigned elem_index = rCellPopulation.GetLocationIndexUsingCell(pParentCell);
     short_axis = rCellPopulation.rGetMesh().GetShortAxisOfElement(elem_index);
     c_vector<double, SPACE_DIM> random_vector;
-    random_vector(0)= short_axis(1);
-    random_vector(1)= -short_axis(0);
+    if(SPACE_DIM==2)
+    {
+        random_vector(0)= short_axis(1);
+        random_vector(1)= -short_axis(0);
+    }
+    else
+    {
+        NEVER_REACHED; // Not implemented for 1D or 3D
+    }
 
-///// Changed ////
-
-//Look for intersected edges and use the midpoint vector of theses as division axis
+    //Look for intersected edges and use the midpoint vector of theses as division axis
     MutableVertexMesh<SPACE_DIM,SPACE_DIM>* p_mesh  = static_cast<MutableVertexMesh<SPACE_DIM,SPACE_DIM>*>(&(rCellPopulation.rGetMesh()));
 
     VertexElement<SPACE_DIM,SPACE_DIM>* p_element = p_mesh->GetElement(rCellPopulation.GetLocationIndexUsingCell(pParentCell));
@@ -86,7 +91,6 @@ c_vector<double, SPACE_DIM> StableRandomDirectionVertexBasedDivisionRule<SPACE_D
 
     random_vector = p_mesh->GetVectorFromAtoB(p_element->GetNodeLocation(intersecting_nodes[0]), p_element->GetNodeLocation((intersecting_nodes[1]+1)%num_nodes));
     random_vector = random_vector + p_mesh->GetVectorFromAtoB(p_element->GetNodeLocation((intersecting_nodes[0]+1)%num_nodes), p_element->GetNodeLocation(intersecting_nodes[1]));
-//////////////////
 
     return random_vector;
 }

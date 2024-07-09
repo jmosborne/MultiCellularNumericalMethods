@@ -65,20 +65,29 @@ void AdamsMoultonNumericalMethod<ELEMENT_DIM,SPACE_DIM>::UpdateAllNodePositions(
 
         unsigned systemSize = this->mpCellPopulation->GetNumNodes()*SPACE_DIM;
 
-        std::vector< c_vector<double,SPACE_DIM> > initialLocations = this->SaveCurrentLocations();
-        std::vector< c_vector<double,SPACE_DIM> > initialF = this->ComputeForcesIncludingDamping();
+        std::vector< c_vector<double,SPACE_DIM> > initialLocations(systemSize,zero_vector<double>(SPACE_DIM));
+        initialLocations = this->SaveCurrentLocations();
+
+        std::vector< c_vector<double,SPACE_DIM> > initialF(systemSize,zero_vector<double>(SPACE_DIM));
+        initialF = this->ComputeForcesIncludingDamping();
 
         // Setup an initial guess consisting of the current node locations + one forward Euler step (note no bcs are applied here)
         Vec initialCondition = PetscTools::CreateAndSetVec(systemSize, 0.0);
         int index = 0;
+        c_vector<double, SPACE_DIM> node_location;
         for (typename AbstractMesh<ELEMENT_DIM, SPACE_DIM>::NodeIterator node_iter = this->mpCellPopulation->rGetMesh().GetNodeIteratorBegin();
              node_iter != this->mpCellPopulation->rGetMesh().GetNodeIteratorEnd();
              ++node_iter, ++index)
         {
-            c_vector<double, SPACE_DIM> location = node_iter->rGetLocation();
+            c_vector<double, SPACE_DIM> node_location = node_iter->rGetLocation();
+            c_vector<double, SPACE_DIM> localF = initialF[index];
+            
+            double initial_guess = 0.0;
             for(unsigned i=0; i<SPACE_DIM; i++)
             {
-                PetscVecTools::SetElement(initialCondition, SPACE_DIM*index + i,  location[i] + mFeStepSize*initialF[index][i]); // Use a FE step as initial Guess
+                //initial_guess = node_location(i) + mFeStepSize*localF(i); // Use a FE step as initial Guess
+            
+                PetscVecTools::SetElement(initialCondition, SPACE_DIM*index + i,  initial_guess); 
             }
         }
         

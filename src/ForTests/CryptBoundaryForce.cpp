@@ -64,17 +64,16 @@ void CryptBoundaryForce<DIM>::AddForceContribution(AbstractCellPopulation<DIM>& 
     c_vector<double,DIM> mCentreOfSphere = mRadiusOfSphere*unit_vector<double>(DIM,DIM-1);
 
     // Iterate over the nodes
+    c_vector<double, DIM> node_location;
     for (typename AbstractMesh<DIM, DIM>::NodeIterator node_iter = rCellPopulation.rGetMesh().GetNodeIteratorBegin();
          node_iter != rCellPopulation.rGetMesh().GetNodeIteratorEnd();
          ++node_iter)
     {   
         // Find the radial distance between this cell and the surface of the sphere
-        const c_vector<double, DIM>& node_location = node_iter->rGetLocation();
-
-
+        node_location = node_iter->rGetLocation();
         c_vector<double,DIM> centre_to_cell =  node_location - mCentreOfSphere;
 
-        if (centre_to_cell(DIM-1)>0 )
+        if (node_location(DIM-1)>0 )
         { 
           centre_to_cell(DIM-1)=0;
         }        
