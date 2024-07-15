@@ -268,51 +268,51 @@ public:
 	void TestWithPositionRecording()
 	{
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-simulation_type"));
-		// std::string simulation_type  = CommandLineArguments::Instance()->GetStringCorrespondingToOption("-simulation_type");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-simulation_type"));
+		std::string simulation_type  = CommandLineArguments::Instance()->GetStringCorrespondingToOption("-simulation_type");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-step_range_lower"));
-		// unsigned step_range_lower = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-step_range_lower");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-step_range_lower"));
+		unsigned step_range_lower = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-step_range_lower");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-step_range_upper"));
-		// unsigned step_range_upper = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-step_range_upper");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-step_range_upper"));
+		unsigned step_range_upper = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-step_range_upper");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-min_amt"));
-		// unsigned min_amt = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-min_amt");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-min_amt"));
+		unsigned min_amt = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-min_amt");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-seed_range_lower"));
-		// unsigned seed_range_lower = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-seed_range_lower");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-seed_range_lower"));
+		unsigned seed_range_lower = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-seed_range_lower");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-seed_range_upper"));
-		// unsigned seed_range_upper = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-seed_range_upper");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-seed_range_upper"));
+		unsigned seed_range_upper = CommandLineArguments::Instance()->GetUnsignedCorrespondingToOption("-seed_range_upper");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-method"));
-		// std::string method = CommandLineArguments::Instance()->GetStringCorrespondingToOption("-method");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-method"));
+		std::string method = CommandLineArguments::Instance()->GetStringCorrespondingToOption("-method");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-ccd"));
-		// double ccLength = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-ccd");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-ccd"));
+		double ccLength = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-ccd");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-stochastic"));
-		// bool isStochasticCCM = CommandLineArguments::Instance()->GetBoolCorrespondingToOption("-stochastic");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-stochastic"));
+		bool isStochasticCCM = CommandLineArguments::Instance()->GetBoolCorrespondingToOption("-stochastic");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-end_time"));
-		// double end_time = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-end_time");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-end_time"));
+		double end_time = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-end_time");
 
-		// TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-compression"));
-		// double compression = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-compression");
+		TS_ASSERT(CommandLineArguments::Instance()->OptionExists("-compression"));
+		double compression = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-compression");
 
 
-		std::string simulation_type = "1d_compression";		
-	 	unsigned step_range_lower = 6; 
-		unsigned step_range_upper = 20; // 14;
-		unsigned min_amt = 0;
-		unsigned seed_range_lower = 0;
-		unsigned seed_range_upper = 0;
-		std::string method = "RK4";	
-		double ccLength = 12.0;
-		bool isStochasticCCM = true;
-		double end_time = 50.0;
-		double compression = 1.0;
+		// std::string simulation_type = "1d_compression";		
+	 	// unsigned step_range_lower = 6; 
+		// unsigned step_range_upper = 20; // 14;
+		// unsigned min_amt = 0;
+		// unsigned seed_range_lower = 0;
+		// unsigned seed_range_upper = 0;
+		// std::string method = "RK4";	
+		// double ccLength = 12.0;
+		// bool isStochasticCCM = true;
+		// double end_time = 50.0;
+		// double compression = 1.0;
 		
 		// SETUP CONSTANTS
 

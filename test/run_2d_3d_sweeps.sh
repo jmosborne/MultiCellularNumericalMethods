@@ -8,7 +8,7 @@
 #
 
 min_step=6; #6
-max_step=18; #18
+max_step=12; #18
 
 methods[0]="FE";
 methods[1]="RK4";
@@ -49,7 +49,8 @@ do
 		# ">" directs std::cout to the file.
 		# "2>&1" directs std::cerr to the same place.
 		# "&" on the end lets the script carry on and not wait until this has finished.
-		nice -20 ../build/optimised/TestNumericsRunner -simulation_type $simulation_type \
+		nice -20 /home/chaste/lib/projects/MultiCellularNumericalMethods/test/TestNumerics \
+														-simulation_type $simulation_type \
 														-step_range_lower $min_step \
 														-step_range_upper $max_step \
 														-seed_range_lower $start_sim \
@@ -59,7 +60,8 @@ do
 														-ccd $ccd \
 														-stochastic $is_stochastic \
 														-end_time $end_time \
-														-compression $compression $> output/${simulation_type}_Run_${i}_${methods[$k]}_Output.txt 2>&1 &
+														-compression $compression \
+														$> /home/chaste/Chaste/projects/MultiCellularNumericalMethods/test/output/${simulation_type}_Run_${i}_${methods[$k]}_Output.txt 2>&1 &
 	done
 done
 

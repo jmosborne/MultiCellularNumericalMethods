@@ -319,7 +319,7 @@ public:
 
 		double crypt_length = 4.0;
 		double interactionCutoff = 5.0;
-		int nCells = 1;
+		// int nCells = 1;
         double dampingNormal = 1.0;
 
 		unsigned num_amts = (unsigned)min_amt+1;

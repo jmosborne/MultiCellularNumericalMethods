@@ -43,7 +43,7 @@ do
 		# ">" directs std::cout to the file.
 		# "2>&1" directs std::cerr to the same place.
 		# "&" on the end lets the script carry on and not wait until this has finished.
-		nice -20 ../build/optimised/TestNumericsCrypt3DRunner -simulation_type $simulation_type \
+		nice -20 /home/chaste/lib/projects/MultiCellularNumericalMethods/test/TestNumericsCrypt3D \
 														-step_range_lower $min_step \
 														-step_range_upper $max_step \
 														-seed_range_lower $start_sim \
@@ -52,7 +52,8 @@ do
 														-min_amt $min_amt \
 														-ccd $ccd \
 														-end_time $end_time \
-														-steady_state $steady_state $> output/3d_crypt_steady_Run_${i}_${methods[$k]}_Output.txt 2>&1 &
+														-steady_state $steady_state \
+														$> /home/chaste/Chaste/projects/MultiCellularNumericalMethods/test/output/3d_crypt_steady_Run_${i}_${methods[$k]}_Output.txt 2>&1 &
 	done
 done
 
