@@ -26,7 +26,7 @@ There are two folders - `src` and `test`.
   * `BackwardEulerNumericalMethod.hpp (cpp)` - BE implicit method
   * `MidpointNumericalMethod.hpp (cpp)` - Midpoint (RK2) explicit method
   * `RK3NumericalMethod.hpp (cpp)` - RK3 method
-  * `RK4NumericalMethod.hpp (cpp)` - RK3 method
+  * `RK4NumericalMethod.hpp (cpp)` - RK4 method
   * `ForTests - extra code used to build the exemplar simulations, boundary conditions, cell cycle models etc.
  
  2. The `test` folder contains:
@@ -52,7 +52,7 @@ cd projects/CellBasedNumericalMethods/test/
 sh run_script.sh
 ```
 
-**NB**: the paper was developed with the release 2021.1, it will not work with with release 2019.1 or under.
+**NB**: the paper was developed with the release 2024.1, it will not work with with release 2019.1 or under.
 
 For further information on using Chaste, see the extensive guide material (https://chaste.cs.ox.ac.uk/trac/wiki/ChasteGuides).
 You may also wish to look at some of the basic user tutorials (https://chaste.cs.ox.ac.uk/trac/wiki/UserTutorials/). Note these links will be updated to github website soon.
